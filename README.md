@@ -12,6 +12,7 @@ Let's Write Down the main Steps :
 - also you can check the sample in <a href="https://gltf.pmnd.rs">gltf.pmnd.rs</a> here.
 - create a models folder and include the models you want and paste the models code that coming from the previous link.
 - for enable the 3d models animation we need to install the package called @react-spring/three
+- npm install @emailjs/browser
 
 
 ## Day 1 Progress
