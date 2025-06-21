@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { Suspense, useRef, useState } from "react";
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
@@ -11,6 +11,7 @@ const Contact = () => {
     setForm({ ...form, [name]: value });
     console.log("form data: ", form);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -41,6 +42,9 @@ const Contact = () => {
     })
   }
 
+  const handleFocus = () => {}
+  const handleBlur = () => {}
+
 
   return (
     <section className='relative flex lg:flex-row flex-col max-container'>
@@ -52,7 +56,8 @@ const Contact = () => {
           onSubmit={handleSubmit}
         >
           <label className='text-black-500 font-semibold'>
-            Name            <input
+            Name
+            <input
               type='text'
               name='name'
               className='input'
@@ -60,10 +65,13 @@ const Contact = () => {
               required
               value={form.name}
               onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
           </label>
           <label className='text-black-500 font-semibold'>
-            Email            <input
+            Email
+            <input
               type='email'
               name='email'
               className='input'
@@ -71,10 +79,13 @@ const Contact = () => {
               required
               value={form.email}
               onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
           </label>
           <label className='text-black-500 font-semibold'>
-            Your Message            <textarea
+            Your Message
+            <textarea
               name='message'
               rows='4'
               className='textarea'
@@ -82,11 +93,17 @@ const Contact = () => {
               placeholder='Write your thoughts here...'
               value={form.message}
               onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
-          </label>          <button
+          </label>
+
+          <button
             type='submit'
             disabled={isLoading}
             className='btn'
+            onFocus={handleFocus}
+            onBlur={handleBlur}
           >
             {isLoading ? "Sending..." : "Submit"}
           </button>
