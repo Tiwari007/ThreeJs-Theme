@@ -71,8 +71,6 @@ export function Island({ isRotating, setIsRotating, ...props }) {
       setIsRotating(false);
     }
   };
-
-
     useFrame(() => {
         if (!isRotating) {
             rotationSpeed.current *= dampingFactor;
@@ -81,27 +79,7 @@ export function Island({ isRotating, setIsRotating, ...props }) {
                 rotationSpeed.current = 0;
             }
             else {
-                const rotation = islandRef.current.rotation.y;
-                const normalizedRotation =
-                    ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
-
-                // Set the current stage based on the island's orientation
-                switch (true) {
-                    case normalizedRotation >= 5.45 && normalizedRotation <= 5.85:
-                        setCurrentStage(4);
-                        break;
-                    case normalizedRotation >= 0.85 && normalizedRotation <= 1.3:
-                        setCurrentStage(3);
-                        break;
-                    case normalizedRotation >= 2.4 && normalizedRotation <= 2.6:
-                        setCurrentStage(2);
-                        break;
-                    case normalizedRotation >= 4.25 && normalizedRotation <= 4.75:
-                        setCurrentStage(1);
-                        break;
-                    default:
-                        setCurrentStage(null);
-                }
+                islandRef.current.rotation.y += rotationSpeed.current;
             }
         }
     })
@@ -113,14 +91,12 @@ export function Island({ isRotating, setIsRotating, ...props }) {
         canvas.addEventListener('pointerup', handlePointerUp);
         canvas.addEventListener('pointermove', handlePointerMove);
         window.addEventListener("keydown", handleKeyDown);
-        window.addEventListener("keyup", handleKeyUp);
-
-        return () => {
+        window.addEventListener("keyup", handleKeyUp);        return () => {
             canvas.removeEventListener('pointerdown', handlePointerDown);
             canvas.removeEventListener('pointerup', handlePointerUp);
             canvas.removeEventListener('pointermove', handlePointerMove);
-            window.addEventListener("keydown", handleKeyDown);
-            window.addEventListener("keyup", handleKeyUp);
+            window.removeEventListener("keydown", handleKeyDown);
+            window.removeEventListener("keyup", handleKeyUp);
         }
     }, [gl, handlePointerDown, handlePointerMove, handlePointerUp])
 

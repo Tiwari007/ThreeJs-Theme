@@ -8,9 +8,9 @@ const Navbar = () => {
         <p className="text-blue-500">🐲</p> Home
       </NavLink>
       <nav className="flex text-lg gap-7 font-medium">
+        <NavLink to="/" className={({ isActive }) => isActive ? 'text-blue-500' : 'text-black'}>Home</NavLink>
         <NavLink to="/contact" className={({ isActive }) => isActive ? 'text-blue-500' : 'text-black'}>Contact</NavLink>
         <NavLink to="/projects" className={({ isActive }) => isActive ? 'text-blue-500' : 'text-black'}>Projects</NavLink>
-        <NavLink to="/about" className={({ isActive }) => isActive ? 'text-blue-500' : 'text-black'}>About</NavLink>
       </nav>
     </header>
   )
